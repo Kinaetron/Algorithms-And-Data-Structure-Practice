@@ -69,7 +69,7 @@ namespace Library.DataStructures
         {
             var tempArray = internalArray;
             internalArray = new T[arraySize];
-            internalArray.CopyTo(tempArray, 0);
+            tempArray.CopyTo(internalArray, 0);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -82,7 +82,5 @@ namespace Library.DataStructures
         IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
         }
-
-
     }
 }

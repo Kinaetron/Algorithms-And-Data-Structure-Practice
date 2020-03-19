@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Library.DataStructures
@@ -17,11 +18,19 @@ namespace Library.DataStructures
 
         public DynamicArray(int capacity)
         {
+            if(capacity <= 0) {
+                throw new ArgumentOutOfRangeException(nameof(capacity));
+            }
+
             internalArray = new T[capacity];
         }
 
         public void Add(T item)
         {
+            if(item == null) {
+                throw new NullReferenceException(nameof(item));
+            }
+
             if(Count >= Capacity) {
                 ResizeArray(Capacity * 2);
             }
@@ -44,6 +53,10 @@ namespace Library.DataStructures
 
         public int IndexOf(T item)
         {
+            if (item == null) {
+                throw new NullReferenceException(nameof(item));
+            }
+
             var comparer = EqualityComparer<T>.Default;
 
             for (int i = 0; i < Count; i++)

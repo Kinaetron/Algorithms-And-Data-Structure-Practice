@@ -28,15 +28,15 @@ namespace Library.DataStructures
         public void Add(T item)
         {
             if(item == null) {
-                throw new NullReferenceException(nameof(item));
-            }
-
-            if(Count >= Capacity) {
-                ResizeArray(Capacity * 2);
+                throw new ArgumentNullException(nameof(item));
             }
 
             internalArray[Count] = item;
             Count++;
+
+            if (Count >= Capacity) {
+                ResizeArray(Capacity * 2);
+            }
         }
 
         public void Remove(T item)
@@ -54,14 +54,14 @@ namespace Library.DataStructures
         public int IndexOf(T item)
         {
             if (item == null) {
-                throw new NullReferenceException(nameof(item));
+                throw new ArgumentNullException(nameof(item));
             }
 
             var comparer = EqualityComparer<T>.Default;
 
             for (int i = 0; i < Count; i++)
             {
-                if (comparer.Equals(internalArray[i])) {
+                if (comparer.Equals(item, internalArray[i])) {
                     return i;
                 }
             }
@@ -71,7 +71,7 @@ namespace Library.DataStructures
 
         public T First() => internalArray[0];
 
-        public T Last() => internalArray[Count];
+        public T Last() => internalArray[Count - 1];
 
         public T this[int index] => internalArray[index];
 
